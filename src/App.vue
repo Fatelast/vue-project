@@ -1,32 +1,38 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <router-view></router-view>
+    <!-- <Footer v-if="isShowFooter" /> -->
+    <Footer v-if="!$route.meta.isHideFooter" />
+    <!-- <button @click="btn">aa</button> -->
   </div>
 </template>
+<script>
+// import request from './utils/request'
+export default {
+  name: 'App',
+  computed: {
+    isShowFooter() {
+      const { path } = this.$route
+      return path !== '/login' && path !== '/register'
+    },
+  },
+  methods: {
+    /* 测试请求
+    btn() {
+      request({
+        url: 'http://39.98.123.211/api/user/passport/login',
+        method: 'post',
+        data: {
+          phone: '14200000000',
+          password: '111111',
+        },
+      }).catch((err) => {
+        console.log(err)
+      })
+    }, */
+  },
+}
+</script>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
