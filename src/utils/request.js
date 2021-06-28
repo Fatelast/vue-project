@@ -34,9 +34,13 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+
+NProgress.configure({ showSpinner: false });
+
 const request = axios.create({
   baseURL: "http://39.98.123.211/api", //基础路径，baseURL+url
   timeout: 1000, //请求超时时间
+  headers: {},
 });
 const errorMessage = {
   401: "未授权",
@@ -50,6 +54,7 @@ request.interceptors.request.use(
 
   (config) => {
     NProgress.start(); //进度条开始
+    // console.log(config);
     //config就是请求配置对象，里面包含请求地址、请求参数、请求头等
 
     //添加公共请求参数

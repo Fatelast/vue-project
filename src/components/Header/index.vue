@@ -37,9 +37,34 @@ export default {
   },
   methods: {
     goSearch() {
+      const keyword = this.keyword.trim()
+      //问题：当keyword没有值，直接点击搜索跳转，路径会不正确
+      //没有值则不跳转
+      if (!keyword) return
       this.$router.history.push({
         name: 'Search',
+        // 添加上query参数
+        query: this.$route.query,
+        params: {
+          keyword,
+        },
       })
+
+      // const keyword = this.keyword.trim()
+
+      // const location = {
+      //   name: 'Search',
+      //   // 添加上query参数
+      //   query: this.$route.query,
+      // }
+
+      // // 问题：当keyword没有值，直接点击搜索跳转，路径会不正确
+      // // 解决：可以跳转，但是当keyword没有值，不要携带params参数
+      // if (keyword) {
+      //   location.params = { keyword }
+      // }
+
+      // this.$router.history.push(location)
     },
   },
 }

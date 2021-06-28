@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header />
     <router-view></router-view>
     <!-- <Footer v-if="isShowFooter" /> -->
     <Footer v-if="!$route.meta.isHideFooter" />
@@ -7,6 +8,7 @@
   </div>
 </template>
 <script>
+import Header from './components/Header'
 // import request from './utils/request'
 export default {
   name: 'App',
@@ -15,6 +17,9 @@ export default {
       const { path } = this.$route
       return path !== '/login' && path !== '/register'
     },
+  },
+  components: {
+    Header,
   },
   methods: {
     /* 测试请求
